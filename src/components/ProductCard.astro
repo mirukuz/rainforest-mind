@@ -1,0 +1,172 @@
+---
+interface Link {
+  label: string;
+  href: string;
+  primary?: boolean;
+}
+
+interface Props {
+  variant: 'featured' | 'small';
+  tag: string;
+  badge?: string;
+  emoji: string;
+  name: string;
+  tagline?: string;
+  description: string;
+  features?: string[];
+  links: Link[];
+}
+
+const { variant, tag, badge, emoji, name, tagline, description, features, links } = Astro.props;
+---
+
+<div class={`card card--${variant}`}>
+  <div class="card-header">
+    <span class="card-tag">{tag}</span>
+    {badge && <span class="card-badge">{badge}</span>}
+  </div>
+  <div class="card-emoji">{emoji}</div>
+  <h3 class="card-name">{name}</h3>
+  {tagline && <p class="card-tagline">{tagline}</p>}
+  <p class="card-description">{description}</p>
+  {features && features.length > 0 && (
+    <ul class="card-features">
+      {features.map(f => <li>→ {f}</li>)}
+    </ul>
+  )}
+  <div class="card-links">
+    {links.map(link => (
+      <a
+        href={link.href}
+        class={`card-link${link.primary ? ' card-link--primary' : ''}`}
+        target="_blank"
+        rel="noopener"
+      >{link.label}</a>
+    ))}
+  </div>
+  {variant === 'featured' && <div class="card-accent" />}
+</div>
+
+<style>
+  .card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 1.75rem;
+    border: 1px solid #e8e4de;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .card-tag {
+    font-size: 0.7rem;
+    color: #8fa876;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .card-badge {
+    font-size: 0.65rem;
+    background: #f0ede8;
+    color: #5c6b4a;
+    padding: 0.15rem 0.6rem;
+    border-radius: 9999px;
+    border: 1px solid #d4cfc8;
+  }
+
+  .card-emoji {
+    font-size: 2rem;
+  }
+
+  .card-name {
+    font-family: Georgia, serif;
+    font-size: 1.5rem;
+    color: #2d3a1e;
+    margin: 0;
+  }
+
+  .card--small .card-name {
+    font-size: 1.2rem;
+  }
+
+  .card-tagline {
+    font-style: italic;
+    color: #6b7c5a;
+    font-size: 0.9rem;
+    margin: 0;
+  }
+
+  .card-description {
+    color: #4a5a3a;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  .card-features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.35rem 1rem;
+    list-style: none;
+    padding: 0;
+    margin: 0.25rem 0;
+  }
+
+  .card-features li {
+    font-size: 0.82rem;
+    color: #5c6b4a;
+  }
+
+  .card-links {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-top: auto;
+    padding-top: 0.5rem;
+  }
+
+  .card-link {
+    font-size: 0.82rem;
+    color: #5c6b4a;
+    text-decoration: none;
+    border: 1px solid #c4bfb8;
+    padding: 0.3rem 0.75rem;
+    border-radius: 6px;
+    transition: background 0.2s, border-color 0.2s;
+  }
+
+  .card-link:hover {
+    background: #f0ede8;
+    border-color: #8fa876;
+  }
+
+  .card-link--primary {
+    background: #5c6b4a;
+    color: #f0ede8;
+    border-color: #5c6b4a;
+  }
+
+  .card-link--primary:hover {
+    background: #2d3a1e;
+    border-color: #2d3a1e;
+  }
+
+  .card-accent {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #5c6b4a, #8fa876, #5c6b4a);
+  }
+</style>
