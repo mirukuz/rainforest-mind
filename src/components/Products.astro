@@ -1,0 +1,103 @@
+---
+import ProductCard from './ProductCard.astro';
+---
+<section class="products" id="products">
+  <p class="section-label">作品</p>
+  <div class="products-grid">
+    <div class="products-featured">
+      <ProductCard
+        variant="featured"
+        tag="书籍 · 社区 · 二手流转"
+        badge="iOS & Android"
+        emoji="📚"
+        name="BookedAgain"
+        tagline='"Books are meant to be read, not to gather dust."'
+        description="二手中文书流转平台。扫 ISBN 上架闲置书，在附近发现书架，线下面基交换。让每一本书继续旅行，让读书这件事连结真实的人。"
+        features={[
+          "扫 ISBN 一键上架",
+          "追踪书的旅行轨迹",
+          "本地化面基交换",
+          "评价体系建立信任",
+          "漂流 / 借阅两种模式",
+          "扫码确认即时交割",
+        ]}
+        links={[
+          { label: "⬇ App Store", href: "https://bookedagain.xyz/" },
+          { label: "▶ Google Play", href: "https://bookedagain.xyz/" },
+          { label: "bookedagain.xyz ↗", href: "https://bookedagain.xyz/" },
+        ]}
+      />
+    </div>
+    <div class="products-stack">
+      <ProductCard
+        variant="small"
+        tag="旅行 · 记录 · 开源"
+        badge="Open Source"
+        emoji="🗺"
+        name="Timeliner"
+        description="把任何带日期的事情变成时间轴——旅行游记、项目历程、读书笔记、人生大小事。开源可 fork。"
+        links={[
+          { label: "查看演示 ↗", href: "https://us-trip.xinczhou.workers.dev/", primary: true },
+          { label: "GitHub ↗", href: "https://github.com/mirukuz/timeliner" },
+        ]}
+      />
+      <ProductCard
+        variant="small"
+        tag="音乐 · 学习"
+        emoji="🎵"
+        name="Jazz 251"
+        description="通勤路上提升爵士乐理的 Quiz App，随时随地练耳训练。"
+        links={[
+          { label: "开始练习 ↗", href: "https://mirukuz.github.io/jazz-251/", primary: true },
+        ]}
+      />
+    </div>
+  </div>
+</section>
+
+<style>
+  .products {
+    padding: 4rem 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    color: #8fa876;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+
+  .products-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    align-items: start;
+  }
+
+  .products-featured {
+    grid-row: span 2;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .products-featured > :global(*) {
+    flex: 1;
+  }
+
+  .products-stack {
+    display: contents;
+  }
+
+  @media (max-width: 768px) {
+    .products-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .products-featured {
+      grid-row: span 1;
+    }
+  }
+</style>
