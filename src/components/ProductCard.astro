@@ -29,7 +29,7 @@ const { variant, tag, badge, emoji, name, tagline, description, features, links 
   <h3 class="card-name">{name}</h3>
   {tagline && <p class="card-tagline">{tagline}</p>}
   <p class="card-description">{description}</p>
-  {features && features?.length > 0 && (
+  {features && features.length > 0 && (
     <ul class="card-features">
       {features.map(f => <li>→ {f}</li>)}
     </ul>
